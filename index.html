@@ -29,6 +29,9 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     display: none;  
+    color: black;
+    font-size: 24px;
+    text-align: center;
   }
   
   #advice.show {
@@ -40,7 +43,6 @@
     text-align: center;
     margin-top: 40vh;
     color: white;
-    font-size: 20px;
     }
 </style>
 <body>
@@ -48,7 +50,7 @@
   <button id="getAdvice">get advice</button>
   <div id="advice"></div>
   </div>
-</body>
+
 
 
 <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js?v=1">
@@ -62,13 +64,14 @@
   async function getAdvice () {
     const res = await fetch('https://api.adviceslip.com/advice');
     const data = await res.json();
-    nn.set(adviceDiv, `"${data.slip.advice}"`);
-    nn.get('#advice').style.display = 'block';
-    nn.get('#advice').classList.add('show');
-    console.log('Button clicked');
-    console.log('Fetching from API...');
-    console.log(data);
+    const advice = data.slip.advice;
+    
+    nn.set(adviceDiv, `"${advice}"`);
+    adviceDiv.classList.add(`show`);
+    nn.on('click', `#getAdvice`, getAdvice);
   }
   
-  nn.on(button, 'click', getAdvice);
+
+  
 </script>
+</body>
