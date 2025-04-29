@@ -32,13 +32,12 @@
     color: black;
     font-size: 24px;
     text-align: center;
+    position: absolute;
+    top: 50px;
+    left: 50px;
   }
   
-  #advice.show {
-   display: block;
-   opacity: 1;
-  }
-  
+
   #container {
     text-align: center;
     margin-top: 40vh;
@@ -61,18 +60,23 @@
   /*global nn*/
   
   const adviceDiv = nn.get('#advice');
-  const button = nn.get('#getAdvice');
+  const button = nn.get('#getAdvice')
+  .on('click', getAdvice);
   
   async function getAdvice() {
+    console.log('error');
     const res = await fetch ('https://api.adviceslip.com/advice');
     const json = await res.json();
+    console.log(json);
     const advice = json.slip.advice;
+    
+    adviceDiv.content(`"${advice}"`);
 
-
-    nn.set(adviceDiv, `"${advice}"`);
-    adviceDiv.classList.add(`show`);
+    adviceDiv.css('display', 'block');
+    await nn.sleep(10);
+    adviceDiv.css('opacity', 1);
   }
-    nn.on(button, 'click', getAdvice);  
+  
 
   
 </script>
