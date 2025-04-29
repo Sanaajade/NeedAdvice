@@ -53,7 +53,7 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js?v=1">
+<script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js">
 </script>
 
 <script>
@@ -62,15 +62,17 @@
   const button = nn.get('#getAdvice');
   
   async function getAdvice () {
-    const res = await fetch('https://api.adviceslip.com/advice');
-    const data = await res.json();
-    const advice = data.slip.advice;
+    const res = await fetch ('https://api.adviceslip.com/advice');
+    const json = await res.json();
+    const advice = json.slip.advice;
+    console.log(json)
+
+    
     
     nn.set(adviceDiv, `"${advice}"`);
     adviceDiv.classList.add(`show`);
-    nn.on('click', `#getAdvice`, getAdvice);
   }
-  
+    nn.on(button, 'click', getAdvice);  
 
   
 </script>
