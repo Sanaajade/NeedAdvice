@@ -71,6 +71,15 @@
     const advice = json.slip.advice;
     
     adviceDiv.content(`"${advice}"`);
+    
+  const arr = advice.split('')
+  arr.forEach((letter) => {
+    const l = letter.toLowerCase()
+    const filename = l + '.png'
+    nn.create('img')
+      .set('src', filename)
+      .addTo('#advice')
+  })
 
     adviceDiv.css('display', 'block');
     await nn.sleep(10);
