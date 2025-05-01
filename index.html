@@ -43,6 +43,12 @@
     margin-top: 40vh;
     color: white;
     }
+  
+  #advice img {
+    height: 5vw;
+    max-height: 50px;
+    margin: 2 px;
+  }
 </style>
 
 <body>
@@ -64,20 +70,17 @@
   .on('click', getAdvice);
   
   async function getAdvice() {
-    console.log('error');
     const res = await fetch ('https://api.adviceslip.com/advice');
     const json = await res.json();
     console.log(json);
-    const advice = json.slip.advice;
-    
-    adviceDiv.content(`"${advice}"`);
-    
-  const arr = advice.split('')
-  arr.forEach((letter) => {
+    const advice = json.slip.advice; 
+    //adviceDiv.content(`"${advice}"`);
+    const arr = advice.split('')
+    arr.forEach((letter) => {
     const l = letter.toLowerCase()
-    const filename = l + '.png'
+    const scrapbookEffect = l + '.png'
     nn.create('img')
-      .set('src', filename)
+      .set('src', scrapbookEffect)
       .addTo('#advice')
   })
 
